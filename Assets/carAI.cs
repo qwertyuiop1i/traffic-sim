@@ -21,14 +21,14 @@ public class carAI : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
-        roads = iR.roads;
+ //       roads = iR.roads;
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(getGridPos(transform.position));
+      //Debug.Log(getGridPos(transform.position));
     }
 
 
@@ -37,17 +37,27 @@ public class carAI : MonoBehaviour
         
         if (collision.gameObject.CompareTag("road"))
         {
-            Debug.Log('e');
-            //    string orientation = collision.GetComponent<road>().orientation;
+            Vector2Int gridPos = getGridPos((Vector2)collision.transform.position);
+            int roadData = iR.roads[gridPos.x,gridPos.y];
 
-            rb.velocity = new Vector2(0, carSpeed);
+            switch (roadData)
+            {
+                case 1:
+                    rb.velocity = new Vector2(0, carSpeed);
+                    break;
+
+                case 2:
+                    rb.velocity =-1* new Vector2(0, carSpeed);
+                    break;
+            }
+            
             
         }
     }
 
-    public Vector2 getGridPos(Vector2 pos)
+    public Vector2Int getGridPos(Vector2 pos)
     {
-        Vector2 coords = new Vector2(Mathf.RoundToInt(pos.x - iR.startRect.x), Mathf.RoundToInt(pos.y - iR.startRect.y));
+        Vector2Int coords = new Vector2Int(Mathf.RoundToInt(pos.x - iR.startRect.x), Mathf.RoundToInt(pos.y - iR.startRect.y));
 
         return coords;
 

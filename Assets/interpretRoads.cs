@@ -26,15 +26,11 @@ public class interpretRoads : MonoBehaviour
             }
             else
             {
-                if (!child.GetComponent<road>().direction)
-                {
-                    childCode = 2;
-                }
-                else
-                {
-                    childCode = 0;
 
-                }
+                    childCode = 2;
+                
+
+                
             }
 
             roads[gridX, gridY] = childCode;
