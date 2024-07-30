@@ -10,7 +10,8 @@ public class carAI : MonoBehaviour
     public Vector2 finalDestination;
     //"U", "R", "D", "L", "UR", "RU","UL", "LU", "DL", "LD", "DR", "RD"
     public Rigidbody2D rb;
-    // Start is called before the first frame update
+
+    public float carSpeed;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -23,11 +24,16 @@ public class carAI : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
+        
         if (collision.gameObject.CompareTag("road"))
         {
-            rb.AddForce(new Vector2(5,0), ForceMode2D.Force);
+            Debug.Log('e');
+            string orientation = collision.GetComponent<road>().orientation;
+
+            rb.AddForce(new Vector2(0f,50f), ForceMode2D.Force);
+            
         }
     }
 
