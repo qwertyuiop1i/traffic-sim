@@ -12,6 +12,8 @@ public class carAI : MonoBehaviour
     public Rigidbody2D rb;
 
     public float carSpeed;
+
+    public bool direction = true;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -20,7 +22,7 @@ public class carAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //use dykstras to find pathh.
     }
 
 
@@ -30,7 +32,7 @@ public class carAI : MonoBehaviour
         if (collision.gameObject.CompareTag("road"))
         {
             Debug.Log('e');
-            string orientation = collision.GetComponent<road>().orientation;
+        //    string orientation = collision.GetComponent<road>().orientation;
 
             rb.AddForce(new Vector2(0f,50f), ForceMode2D.Force);
             

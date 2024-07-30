@@ -6,11 +6,13 @@ public class interpretRoads : MonoBehaviour
 {
     public Vector2 startRect;
     public Vector2 endRect;
-   
+
+    public int[,] roads;
+
     // Start is called before the first frame update
     void Start()
     {
-        transform.chil
+        //transform.GetComponentInParent;
     }
 
     // Update is called once per frame

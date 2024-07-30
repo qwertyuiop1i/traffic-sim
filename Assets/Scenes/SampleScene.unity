@@ -240,7 +240,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 1.73
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -291,6 +291,7 @@ MonoBehaviour:
   finalDestination: {x: 0, y: 0}
   rb: {fileID: 1045236758}
   carSpeed: 0
+  direction: 1
 --- !u!212 &1045236761
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -478,3 +479,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed40a1c374efd9b4a99476271266268b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startRect: {x: -4.5, y: -4.5}
+  endRect: {x: 4.5, y: 4.5}
