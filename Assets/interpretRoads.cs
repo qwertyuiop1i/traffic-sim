@@ -9,10 +9,37 @@ public class interpretRoads : MonoBehaviour
 
     public int[,] roads;
 
-    // Start is called before the first frame update
     void Start()
     {
-        //transform.GetComponentInParent;
+        roads = new int[(int)(startRect.x - endRect.x), (int)(startRect.y - endRect.y)];
+
+        foreach (GameObject child in transform)
+        {
+            int childCode;
+
+                int gridX = (int)(child.transform.position.x-startRect.x);
+                int gridY = (int)(child.transform.position.y-startRect.y);
+
+            if (child.GetComponent<road>().direction)
+            {
+                childCode = 1;
+            }
+            else
+            {
+                if (!child.GetComponent<road>().direction)
+                {
+                    childCode = 2;
+                }
+                else
+                {
+                    childCode = 0;
+
+                }
+            }
+
+            roads[gridX, gridY] = childCode;
+            
+        }
     }
 
     // Update is called once per frame
