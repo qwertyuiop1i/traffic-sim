@@ -18,11 +18,14 @@ public class carAI : MonoBehaviour
     public interpretRoads ?iR;
 
     public int[,] ?roads;
+    public float initCarSpeed;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
- //       roads = iR.roads;
-       
+        //       roads = iR.roads;
+
+
+        initCarSpeed = carSpeed;
     }
 
     // Update is called once per frame
@@ -67,6 +70,22 @@ public class carAI : MonoBehaviour
                 rb.rotation = Mathf.Atan2(rb.velocity.y, rb.velocity.x)*Mathf.Rad2Deg+90f;
             }
 
+        }
+        if (collision.gameObject.CompareTag("light"))
+        {
+            if (collision.GetComponent<trafficLight>().color == 2) { carSpeed = 0f; }
+            else
+            {
+                if (collision.GetComponent<trafficLight>().color == 1)
+                {
+                    carSpeed *= 0.25f;
+
+                }
+                else
+                {
+                    carSpeed = initCarSpeed;
+                }
+            }
         }
     }
 
