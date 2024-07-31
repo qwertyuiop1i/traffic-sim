@@ -23,6 +23,7 @@ public class carAI : MonoBehaviour
 
     public float raycastDistance = 10f;
 
+    public bool seenCar = false;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -32,21 +33,32 @@ public class carAI : MonoBehaviour
         initCarSpeed = carSpeed;
     }
 
-    // Update is called once per frame
-    void Update()
+
+    void OnDrawGizmos()
     {
-        RaycastHit2D hitForward = Physics2D.Raycast(transform.position, transform.up, raycastDistance); 
-        if (hitForward.collider != null && hitForward.collider.CompareTag("cars"))
-        {
-            // Car detected directly ahead
-            // Implement response behavior here (e.g., slow down, change lane)
-            Debug.Log("Car ahead!");
-            carSpeed = initCarSpeed * 0.1f;
-
-        }
-
-
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(transform.position, transform.up * raycastDistance);
     }
+
+        // Update is called once per frame
+        void Update()
+    {
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, transform.up, raycastDistance);
+        foreach (RaycastHit2D hit in hits)
+        {
+            if (hit.collider != null && hit.collider.CompareTag("cars"))
+            {
+                Debug.Log("Car ahead!");
+                seenCar = true;
+                break;
+            }
+            else
+            {
+                seenCar = false;
+            }
+        }
+    }
+
 
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -108,6 +120,11 @@ public class carAI : MonoBehaviour
             }
         }
         else { carSpeed = initCarSpeed; }
+        if (seenCar)
+        {
+            carSpeed =initCarSpeed* 0.05f;
+        }
+  
     }
 
 
