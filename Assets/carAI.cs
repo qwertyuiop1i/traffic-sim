@@ -19,6 +19,8 @@ public class carAI : MonoBehaviour
 
     public int[,] ?roads;
     public float initCarSpeed;
+    public float steerSpeed=0f;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -32,11 +34,16 @@ public class carAI : MonoBehaviour
     void Update()
     {
       //Debug.Log(getGridPos(transform.position));
+
+   
     }
 
 
     private void OnTriggerStay2D(Collider2D collision)
     {
+
+
+        roads = iR.roads;
         roads = iR.roads;
         if (collision.gameObject.CompareTag("road"))
         {
@@ -47,29 +54,32 @@ public class carAI : MonoBehaviour
                 int roadData = iR.roads[gridPos.x, gridPos.y];
                 Debug.Log(roadData);
 
+                float targetAngle = 0f;
+
                 switch (roadData)
                 {
                     case 1:
-                        rb.velocity = new Vector2(0, carSpeed);
-                        
+                        targetAngle = 0f;
                         break;
 
                     case 2:
-                        rb.velocity = -1 * new Vector2(0, carSpeed);
+                        targetAngle = 180f;
                         break;
 
                     case 3:
-                        rb.velocity = new Vector2(carSpeed, 0);
+                        targetAngle = -90f;
                         break;
 
                     case 4:
-                        rb.velocity = -1 * new Vector2(carSpeed, 0);
+                        targetAngle = 90f;
                         break;
-
                 }
-                rb.rotation = Mathf.Atan2(rb.velocity.y, rb.velocity.x)*Mathf.Rad2Deg+90f;
-            }
 
+
+                rb.rotation = Mathf.LerpAngle(rb.rotation, targetAngle, steerSpeed * Time.deltaTime);
+
+                rb.velocity = transform.up * carSpeed;
+            }
         }
         if (collision.gameObject.CompareTag("light"))
         {
@@ -78,7 +88,7 @@ public class carAI : MonoBehaviour
             {
                 if (collision.GetComponent<trafficLight>().color == 1)
                 {
-                    carSpeed *= 0.25f;
+                    carSpeed = initCarSpeed*0.25f;
 
                 }
                 else
@@ -87,6 +97,7 @@ public class carAI : MonoBehaviour
                 }
             }
         }
+        else { carSpeed = initCarSpeed; }
     }
 
 
