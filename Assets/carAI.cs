@@ -21,6 +21,8 @@ public class carAI : MonoBehaviour
     public float initCarSpeed;
     public float steerSpeed=0f;
 
+    public float raycastDistance = 10f;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -33,9 +35,17 @@ public class carAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      //Debug.Log(getGridPos(transform.position));
+        RaycastHit2D hitForward = Physics2D.Raycast(transform.position, transform.up, raycastDistance); 
+        if (hitForward.collider != null && hitForward.collider.CompareTag("cars"))
+        {
+            // Car detected directly ahead
+            // Implement response behavior here (e.g., slow down, change lane)
+            Debug.Log("Car ahead!");
+            carSpeed = initCarSpeed * 0.1f;
 
-   
+        }
+
+
     }
 
 
