@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1552073071511808564}
   - component: {fileID: 1552073071511808565}
   - component: {fileID: 1552073071511808567}
+  - component: {fileID: 1573099276}
   m_Layer: 0
   m_Name: road
   m_TagString: road
@@ -25,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1552073071511808570}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1121543061, guid: 8a265555f3a230447a412b2ec445aa36, type: 3}
+  m_Sprite: {fileID: -2125625052, guid: 8a265555f3a230447a412b2ec445aa36, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -109,5 +110,19 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5}
+  m_Size: {x: 0.4, y: 0.4}
   m_EdgeRadius: 0
+--- !u!114 &1573099276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1552073071511808570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d364424d7e4b19469b31753eaf56934, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orientation: 
+  direction: 2

@@ -42,20 +42,29 @@ public class carAI : MonoBehaviour
             if (iR != null && roads != null && gridPos.x >= 0 && gridPos.x < roads.GetLength(0) && gridPos.y >= 0 && gridPos.y < roads.GetLength(1))
             {
                 int roadData = iR.roads[gridPos.x, gridPos.y];
-                Debug.Log(gridPos.x);
+                Debug.Log(roadData);
 
                 switch (roadData)
                 {
                     case 1:
                         rb.velocity = new Vector2(0, carSpeed);
+                        
                         break;
 
                     case 2:
                         rb.velocity = -1 * new Vector2(0, carSpeed);
                         break;
 
+                    case 3:
+                        rb.velocity = new Vector2(carSpeed, 0);
+                        break;
+
+                    case 4:
+                        rb.velocity = -1 * new Vector2(carSpeed, 0);
+                        break;
 
                 }
+                rb.rotation = Mathf.Atan2(rb.velocity.y, rb.velocity.x)*Mathf.Rad2Deg+90f;
             }
 
         }
@@ -64,8 +73,8 @@ public class carAI : MonoBehaviour
 
     public Vector2Int getGridPos(Vector2 pos)
     {
-        Vector2Int coords = new Vector2Int(Mathf.RoundToInt(pos.x - iR.startRect.x)/2, Mathf.RoundToInt(pos.y - iR.startRect.y)/2);
-        Debug.Log(coords);
+        Vector2Int coords = new Vector2Int(Mathf.RoundToInt(pos.x - iR.startRect.x-0.5f), Mathf.RoundToInt(pos.y - iR.startRect.y-0.5f));
+      //  Debug.Log(coords);
         return coords;
 
     }

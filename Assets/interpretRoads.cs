@@ -20,18 +20,7 @@ public class interpretRoads : MonoBehaviour
             int gridX = (int)(child.transform.position.x-startRect.x);
             int gridY = (int)(child.transform.position.y-startRect.y);
 
-            if (child.GetComponent<road>().direction)
-            {
-                childCode = 1;
-            }
-            else
-            {
-
-                childCode = 2;
-                
-
-                
-            }
+            childCode = child.GetComponent<road>().direction;
 
             roads[gridX, gridY] = childCode;
            // Debug.Log(childCode+"eeee");
