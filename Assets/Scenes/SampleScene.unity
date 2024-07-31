@@ -1041,7 +1041,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orientation: 
-  direction: 1
+  direction: 0
 --- !u!1001 &561080302
 PrefabInstance:
   m_ObjectHideFlags: 0

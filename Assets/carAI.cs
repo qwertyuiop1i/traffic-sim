@@ -15,9 +15,9 @@ public class carAI : MonoBehaviour
 
     public bool direction = true;
 
-    public interpretRoads iR;
+    public interpretRoads ?iR;
 
-    public int[,] roads;
+    public int[,] ?roads;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -34,31 +34,38 @@ public class carAI : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        
+        roads = iR.roads;
         if (collision.gameObject.CompareTag("road"))
         {
             Vector2Int gridPos = getGridPos((Vector2)collision.transform.position);
-            int roadData = iR.roads[gridPos.x,gridPos.y];
 
-            switch (roadData)
+            if (iR != null && roads != null && gridPos.x >= 0 && gridPos.x < roads.GetLength(0) && gridPos.y >= 0 && gridPos.y < roads.GetLength(1))
             {
-                case 1:
-                    rb.velocity = new Vector2(0, carSpeed);
-                    break;
+                int roadData = iR.roads[gridPos.x, gridPos.y];
+                Debug.Log(gridPos.x);
 
-                case 2:
-                    rb.velocity =-1* new Vector2(0, carSpeed);
-                    break;
+                switch (roadData)
+                {
+                    case 1:
+                        rb.velocity = new Vector2(0, carSpeed);
+                        break;
+
+                    case 2:
+                        rb.velocity = -1 * new Vector2(0, carSpeed);
+                        break;
+
+
+                }
             }
-            
-            
+
         }
     }
 
+
     public Vector2Int getGridPos(Vector2 pos)
     {
-        Vector2Int coords = new Vector2Int(Mathf.RoundToInt(pos.x - iR.startRect.x), Mathf.RoundToInt(pos.y - iR.startRect.y));
-
+        Vector2Int coords = new Vector2Int(Mathf.RoundToInt(pos.x - iR.startRect.x)/2, Mathf.RoundToInt(pos.y - iR.startRect.y)/2);
+        Debug.Log(coords);
         return coords;
 
     }

@@ -11,14 +11,14 @@ public class interpretRoads : MonoBehaviour
 
     void Start()
     {
-        roads = new int[(int)(startRect.x - endRect.x), (int)(startRect.y - endRect.y)];
+        roads = new int[(int)(Mathf.Abs(startRect.x - endRect.x)), (int)(Mathf.Abs(startRect.y - endRect.y))];
 
-        foreach (GameObject child in transform)
+        foreach (Transform child in transform)
         {
             int childCode;
 
-                int gridX = (int)(child.transform.position.x-startRect.x);
-                int gridY = (int)(child.transform.position.y-startRect.y);
+            int gridX = (int)(child.transform.position.x-startRect.x);
+            int gridY = (int)(child.transform.position.y-startRect.y);
 
             if (child.GetComponent<road>().direction)
             {
@@ -27,13 +27,14 @@ public class interpretRoads : MonoBehaviour
             else
             {
 
-                    childCode = 2;
+                childCode = 2;
                 
 
                 
             }
 
             roads[gridX, gridY] = childCode;
+           // Debug.Log(childCode+"eeee");
             
         }
     }
